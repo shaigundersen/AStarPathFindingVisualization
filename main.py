@@ -40,8 +40,10 @@ class Node:
 
     def is_open(self):
         return self.color == GREEN
+
     def is_free(self):
         return self.color == WHITE
+
     def is_barrier(self):
         return self.color == BLACK
 
@@ -56,6 +58,7 @@ class Node:
 
     def make_closed(self):
         self.color = RED
+
     def make_start(self):
         self.color = ORANGE
 
@@ -98,11 +101,13 @@ def h(p1, p2):
     x2, y2 = p2
     return abs(x1 - x2) + abs(y1 - y2)
 
+
 def reconstruct_path(came_from, current, draw):
     while current in came_from:
         current = came_from[current]
         current.make_path()
         draw()
+
 
 def a_star_path_finding(draw, grid, start, end):
     count = 0
@@ -145,6 +150,7 @@ def a_star_path_finding(draw, grid, start, end):
             current.make_closed()
     return False
 
+
 def make_grid(rows, width):
     grid = []
     gap = width // rows
@@ -155,12 +161,14 @@ def make_grid(rows, width):
             grid[i].append(node)
     return grid
 
+
 def draw_grid(surface, rows, width):
     gap = width // rows
     for i in range(rows):
         pygame.draw.line(surface, GREY, (0, i * gap), (width, i * gap))
     for j in range(rows):
         pygame.draw.line(surface, GREY, (j * gap, 0), (j * gap, width))
+
 
 def draw(surface, grid, rows, width):
     surface.fill(WHITE)
@@ -169,6 +177,7 @@ def draw(surface, grid, rows, width):
             node.draw(surface)
     draw_grid(surface, rows, width)
     pygame.display.update()
+
 
 def get_clicked_pos(pos, rows, width):
     gap = width // rows
@@ -229,8 +238,6 @@ def main(surface, width):
                     start_node = None
                     end_node = None
                     grid = make_grid(ROWS, width)
-
-
     pygame.quit()
 
 
